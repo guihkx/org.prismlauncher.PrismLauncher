@@ -1,0 +1,34 @@
+diff --git a/launcher/LaunchController.cpp b/launcher/LaunchController.cpp
+index d36ee3fe..024a4d37 100644
+--- a/launcher/LaunchController.cpp
++++ b/launcher/LaunchController.cpp
+@@ -93,9 +93,7 @@ void LaunchController::decideAccount()
+         auto reply = CustomMessageBox::selectable(
+             m_parentWidget,
+             tr("No Accounts"),
+-            tr("In order to play Minecraft, you must have at least one Microsoft or Mojang "
+-               "account logged in. Mojang accounts can only be used offline. "
+-               "Would you like to open the account manager to add an account now?"),
++            tr("Would you like to open the account manager to add an account now?"),
+             QMessageBox::Information,
+             QMessageBox::Yes | QMessageBox::No
+         )->exec();
+diff --git a/launcher/minecraft/auth/AccountList.cpp b/launcher/minecraft/auth/AccountList.cpp
+index b3b57c74..a043cdb9 100644
+--- a/launcher/minecraft/auth/AccountList.cpp
++++ b/launcher/minecraft/auth/AccountList.cpp
+@@ -657,13 +657,7 @@ void AccountList::setListFilePath(QString path, bool autosave)
+ 
+ bool AccountList::anyAccountIsValid()
+ {
+-    for(auto account: m_accounts)
+-    {
+-        if(account->ownsMinecraft()) {
+-            return true;
+-        }
+-    }
+-    return false;
++    return true;
+ }
+ 
+ void AccountList::fillQueue() {
