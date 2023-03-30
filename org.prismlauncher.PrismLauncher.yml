@@ -134,6 +134,24 @@ modules:
     modules:
       - shared-modules/glu/glu-9.json
 
+  - name: narrator
+    buildsystem: simple
+    build-commands:
+      - echo -e "LEXES = cmulex\nLANGS = usenglish\nVOXES = cmu_us_kal16" > config/default.lv
+      - sed -i '/$(INSTALL) -m 755 $(BINDIR)\/flite_time $(DESTDIR)$(INSTALLBINDIR)/d' main/Makefile
+      - ./configure --prefix=/app --with-audio=alsa --enable-shared
+      - make
+      - make install
+    sources:
+      - type: git
+        url: https://github.com/festvox/flite.git
+        tag: v2.2
+        commit: e9e2e37c329dbe98bfeb27a1828ef9a71fa84f88
+    cleanup:
+      - /bin
+      - /include
+      - /lib/*.a
+
   - name: enhance
     buildsystem: simple
     build-commands:
